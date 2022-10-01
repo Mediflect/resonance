@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class FPSControls : MonoBehaviour
 {
+    public event Action InteractPressed;
+
     public enum MotionType
     {
         Stationary,
@@ -66,6 +69,11 @@ public class FPSControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         UpdateRotation();
         UpdatePosition();
+        // check for interacts
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            InteractPressed?.Invoke();
+        }
     }
 
     private void UpdateRotation()
