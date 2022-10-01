@@ -11,6 +11,7 @@ public class FPSControls : MonoBehaviour
     }
 
     public MotionType CurrentMotion => currentMotion;
+    public Transform CameraTransform => cameraTransform;
 
     [SerializeField]
     private Transform cameraTransform = null;
