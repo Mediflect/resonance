@@ -1326,10 +1326,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 532606786257716811, guid: 15881a88552d8064ca723b9483f94340, type: 3}
-      propertyPath: m_PlaneDistance
-      value: 0.31
-      objectReference: {fileID: 0}
     - target: {fileID: 589759370195811376, guid: 15881a88552d8064ca723b9483f94340, type: 3}
       propertyPath: m_Name
       value: Player
