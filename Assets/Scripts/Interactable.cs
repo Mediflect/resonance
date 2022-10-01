@@ -1,12 +1,12 @@
-using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    public event Action PlayerUsed;
+    public UnityEvent PlayerInteracted;
 
     public void Use()
     {
-        PlayerUsed?.Invoke();
+        PlayerInteracted.Invoke();
     }
 }

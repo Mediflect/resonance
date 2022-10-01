@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class OpenableDoor : MonoBehaviour
 {
-    public enum DoorState 
-    {
-        Open,
-        Closed,
-        Opening,
-        Closing
-    }
-
     public Transform doorObjTransform;
     public Transform doorOpenTarget;
     public Transform doorClosedTarget;
@@ -44,16 +36,9 @@ public class OpenableDoor : MonoBehaviour
     {
         blockerCollider.SetActive(true);
         doorObjTransform.gameObject.SetActive(true);
-        float timer = transitionTime;
-        while (timer > 0f)
-        {
-            float tValue = Mathf.InverseLerp(transitionTime, 0, timer);
-            float tValueSmoothed = Mathf.SmoothStep(0, 1, tValue);
-            Debug.Log($"{tValue}, {tValueSmoothed}");
-            doorObjTransform.position = Vector3.Lerp(doorClosedTarget.position, doorOpenTarget.position, tValueSmoothed);
-            yield return null;
-            timer -= Time.deltaTime;
-        }
+
+        yield return Helpers.RunSmoothMoveTo(doorObjTransform, doorClosedTarget, doorOpenTarget, transitionTime);
+
         doorObjTransform.gameObject.SetActive(false);
         blockerCollider.SetActive(false);
         changeStateCoroutine = null;
@@ -64,13 +49,8 @@ public class OpenableDoor : MonoBehaviour
         blockerCollider.SetActive(true);
         doorObjTransform.gameObject.SetActive(true);
         float timer = transitionTime;
-        while (timer > 0f)
-        {
-            float tValueSmoothed = Mathf.SmoothStep(0, 1, Mathf.InverseLerp(transitionTime, 0, timer));
-            doorObjTransform.position = Vector3.Lerp(doorOpenTarget.position, doorClosedTarget.position, tValueSmoothed);
-            yield return null;
-            timer -= Time.deltaTime;
-        }
+
+        yield return Helpers.RunSmoothMoveTo(doorObjTransform, doorOpenTarget, doorClosedTarget, transitionTime);
 
         changeStateCoroutine = null;
     }

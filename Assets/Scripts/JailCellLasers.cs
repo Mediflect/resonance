@@ -8,6 +8,12 @@ public class JailCellLasers : MonoBehaviour
     public bool isPowered = true;
     public List<LaserEmitter> allLasers = new List<LaserEmitter>();
 
+    public void SetPowered(bool powered)
+    {
+        isPowered = powered;
+        Debug.Log("Cell lasers powered changed to " + powered);
+    }
+
     private void Awake()
     {
         App.Request(OnAppExists);

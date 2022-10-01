@@ -1,19 +1,59 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ToggleSwitch : MonoBehaviour
 {
-    public Interactable interactable;
-    public GameObject toggleObject;
+    public UnityEvent TurnedOn;
+    public UnityEvent TurnedOff;
+
+    public bool isOn = true;
+    public float handleTransitionTime = 0.5f;
+    public Transform handleObj;
+    public Transform handleOnTarget;
+    public Transform handleOffTarget;
+    public GameObject onLight;
+    public GameObject offLight;
+
+    private Coroutine toggleCoroutine = null;
+
+    public void Toggle()
+    {
+        if (toggleCoroutine != null)
+        {
+            return;
+        }
+        
+        toggleCoroutine = StartCoroutine(RunToggle());
+    }
 
     private void Awake()
     {
-        interactable.PlayerUsed += OnToggled;
+        handleObj.position = handleOnTarget.position;
+        SetLight();
     }
 
-    private void OnToggled()
+    private void SetLight()
     {
-        toggleObject.SetActive(!toggleObject.activeSelf);
+        onLight.SetActive(isOn);
+        offLight.SetActive(!isOn);
+    }
+
+    private IEnumerator RunToggle()
+    {
+        isOn = !isOn;
+        SetLight();
+        if (isOn)
+        {
+            TurnedOn.Invoke();
+            yield return Helpers.RunSmoothMoveTo(handleObj, handleOffTarget, handleOnTarget, handleTransitionTime);
+        }
+        else
+        {
+            TurnedOff.Invoke();
+            yield return Helpers.RunSmoothMoveTo(handleObj, handleOnTarget, handleOffTarget, handleTransitionTime);
+        }
+
+        toggleCoroutine = null;
     }
 }
