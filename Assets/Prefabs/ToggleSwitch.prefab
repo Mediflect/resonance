@@ -2447,7 +2447,7 @@ Transform:
   - {fileID: 5949705452676423251}
   - {fileID: 6528128097660993806}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7718661496261171412
 MonoBehaviour:
@@ -2467,7 +2467,7 @@ MonoBehaviour:
   TurnedOff:
     m_PersistentCalls:
       m_Calls: []
-  isOn: 0
+  isOn: 1
   handleTransitionTime: 0.5
   handleObj: {fileID: 8392190028439512659}
   handleOnTarget: {fileID: 1220902015771567716}
