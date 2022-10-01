@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public FPSControls controls;
     public Respawnable respawnable;
+    public CameraEffects cameraEffects;
 
     private void Awake()
     {
@@ -17,12 +18,14 @@ public class Player : MonoBehaviour
     private void OnKilled()
     {
         controls.enabled = false;
+        cameraEffects.SetDeathEffectActive(true);
     }
 
     private void OnRespawned()
     {
         // This aligns the camera to the spawn point as well
         controls.CameraTransform.rotation = respawnable.currentRespawn.spawnTransform.rotation;
+        cameraEffects.SetDeathEffectActive(false);
         StartCoroutine(RunReenableControls());
     }
 
