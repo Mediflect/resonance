@@ -355,7 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 589759370152761651}
   charController: {fileID: 589759370195811389}
-  lookSpeed: 15
+  lookSpeed: 5
   maxVerticalLookAngle: 85
   invertVerticalLook: 0
   speed: 2

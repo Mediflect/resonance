@@ -44,7 +44,6 @@ public class FPSControls : MonoBehaviour
 
     private MotionType currentMotion = MotionType.Stationary;
     private Vector3 currentVelocity = Vector3.zero;
-    private Vector3 goalVelocity = Vector3.zero;
     private float currentPitch = 0f;
     private float currentYaw = 0f;
 
@@ -52,6 +51,13 @@ public class FPSControls : MonoBehaviour
     {
         currentPitch = cameraTransform.localEulerAngles.x;
         currentYaw = cameraTransform.localEulerAngles.y;
+        charController.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        charController.enabled = false;
+        currentVelocity = Vector3.zero;
     }
 
     private void Update()
@@ -104,7 +110,7 @@ public class FPSControls : MonoBehaviour
         }
         moveDir = moveDir.normalized;
         bool isRunning = Keyboard.current.leftShiftKey.isPressed;
-        goalVelocity = moveDir * (isRunning ? runSpeed : speed);
+        Vector3 goalVelocity = moveDir * (isRunning ? runSpeed : speed);
 
         currentVelocity = Vector3.MoveTowards(currentVelocity, goalVelocity, acceleration * Time.deltaTime);
         if (applyGravity)
