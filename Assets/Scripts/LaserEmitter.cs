@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LaserEmitter : MonoBehaviour
 {
-    public KillLaser killLaser;
+    public KillCollider killLaser;
     
     public void SetLaserActive(bool active)
     {

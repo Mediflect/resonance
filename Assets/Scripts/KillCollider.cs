@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class KillLaser : MonoBehaviour
+public class KillCollider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {

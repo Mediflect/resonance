@@ -29,7 +29,17 @@ public class ToggleSwitch : MonoBehaviour
 
     private void Awake()
     {
-        handleObj.position = handleOnTarget.position;
+        
+        if (isOn)
+        {
+            handleObj.position =  handleOffTarget.position;
+            TurnedOn.Invoke();
+        }
+        else
+        {
+            handleObj.position = handleOffTarget.position;
+            TurnedOff.Invoke();
+        }
         SetLight();
     }
 
