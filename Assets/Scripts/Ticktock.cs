@@ -5,8 +5,8 @@ using UnityEngine;
 public class Ticktock : MonoBehaviour
 {
     public AudioSource sound;
-
-    private float timer = 0f;
+    public bool isPaused = false;
+    public float timer = 0f;
 
     private void OnEnable()
     {
@@ -15,6 +15,11 @@ public class Ticktock : MonoBehaviour
 
     private void Update()
     {
+        if (isPaused)
+        {
+            return;
+        }
+
         timer += Time.deltaTime;
         if (timer > 1f)
         {

@@ -15,6 +15,7 @@ public class TimestopFX : MonoBehaviour
     public AudioSource leadupSound;
     public float holdSoundDelay = 3.497f;
     public AudioSource holdSound;
+    public Ticktock ticktock;
 
     private Coroutine currentCoroutine = null;
 
@@ -34,14 +35,25 @@ public class TimestopFX : MonoBehaviour
     private IEnumerator RunEffects()
     {
         StartCoroutine(RunStartSoundEffects());
+
+        // In effect
+        ticktock.isPaused = true;
         yield return RunVolumeWeightTransition(App.PreTimestopEffectVolume, preEffectDuration, 0, 1);
         App.PreTimestopEffectVolume.weight = 0;
+        ticktock.timer = 0f; // skip the first one
+        ticktock.isPaused = false;
         yield return RunVolumeWeightTransition(App.TimestopEffectVolume, startTransitionDuration, 0.01f, 1);
+
+        // Hold
         yield return YieldInstructionCache.WaitForSeconds(holdDuration);
+
+        // Out effect
+        ticktock.isPaused = true;
         yield return RunVolumeWeightTransition(App.TimestopEffectVolume, endTransitionDuration / 2f, 1, 0.01f);
         App.TimestopEffectVolume.weight = 0f;
         yield return RunVolumeWeightTransition(App.PreTimestopEffectVolume, endTransitionDuration / 2f, 1, 0);
         holdSound.Stop();
+        ticktock.isPaused = false;
         currentCoroutine = null;
     }
 
