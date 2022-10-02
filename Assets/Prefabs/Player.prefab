@@ -363,6 +363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls: {fileID: 589759370195811391}
   respawnable: {fileID: 8478849319741436881}
+  headCamera: {fileID: 589759370152761652}
   cameraEffects: {fileID: 2354425640570538063}
   interactRaycaster: {fileID: 4133494502085693810}
   sounds: {fileID: 5917158917475480196}

@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public FPSControls controls;
     public Respawnable respawnable;
+    public Camera headCamera;
     public CameraEffects cameraEffects;
     public InteractRaycaster interactRaycaster;
     public PlayerSounds sounds;

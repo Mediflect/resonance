@@ -10,6 +10,11 @@ public class Interactable : MonoBehaviour
 
     public void Use(Player player)
     {
+        if (!enabled)
+        {
+            return;
+        }
+
         if (App.Cycle.IsPaused && !isUsableDuringCyclePause)
         {
             return;
