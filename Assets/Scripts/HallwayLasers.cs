@@ -26,7 +26,7 @@ public class HallwayLasers : MonoBehaviour
     private IEnumerator RunShootLasers()
     {
         SetLasersActive(true);
-        yield return YieldInstructionCache.WaitForSeconds(2f);
+        yield return YieldInstructionCache.WaitForSeconds(3f);
         SetLasersActive(false);
     }
 

@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class FPSControls : MonoBehaviour
 {
     public event Action InteractPressed;
+    public event Action PowerPressed;
 
     public enum MotionType
     {
@@ -73,6 +74,10 @@ public class FPSControls : MonoBehaviour
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
             InteractPressed?.Invoke();
+        }
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            PowerPressed?.Invoke();
         }
     }
 

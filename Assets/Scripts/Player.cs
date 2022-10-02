@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         controls.InteractPressed += OnInteract;
+        controls.PowerPressed += OnPowerActivated;
         respawnable.Killed += OnKilled;
         respawnable.Respawned += OnRespawned;
         interactRaycaster.InteractableFound += OnInteractableFound;
@@ -38,6 +39,11 @@ public class Player : MonoBehaviour
         {
             interactRaycaster.CurrentInteractable.Use(this);
         }
+    }
+
+    private void OnPowerActivated()
+    {
+        cameraEffects.PlayTimestopEffect();
     }
 
     private void OnKilled()

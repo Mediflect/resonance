@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// Things that should exist for the lifetime of the app
@@ -11,6 +12,12 @@ public class App : MonoBehaviour
 
     public static Cycle Cycle => Instance.cycle;
     public Cycle cycle;
+
+    public static Volume TimestopEffectVolume => Instance.timestopEffectVolume;
+    public Volume timestopEffectVolume;
+
+    public static Volume PreTimestopEffectVolume => Instance.preTimestopEffectVolume;
+    public Volume preTimestopEffectVolume;
 
     private static List<Action> requestsForApp = new List<Action>();
 
