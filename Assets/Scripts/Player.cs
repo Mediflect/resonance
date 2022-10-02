@@ -11,6 +11,18 @@ public class Player : MonoBehaviour
     public InteractRaycaster interactRaycaster;
     public PlayerSounds sounds;
 
+    public void SetSpawnPoint(RespawnPoint point)
+    {
+        if (respawnable.currentRespawn == point)
+        {
+            return;
+        }
+
+        respawnable.currentRespawn.SetActiveState(RespawnPoint.ActiveState.Inactive);
+        respawnable.currentRespawn = point;
+        respawnable.currentRespawn.SetActiveState(RespawnPoint.ActiveState.Player);
+    }
+
     private void Awake()
     {
         controls.InteractPressed += OnInteract;
@@ -24,7 +36,7 @@ public class Player : MonoBehaviour
     {
         if (interactRaycaster.CurrentInteractable != null)
         {
-            interactRaycaster.CurrentInteractable.Use();
+            interactRaycaster.CurrentInteractable.Use(this);
         }
     }
 
@@ -54,6 +66,7 @@ public class Player : MonoBehaviour
         controls.enabled = true;
         interactRaycaster.enabled = true;
         cameraEffects.SetDeathEffectActive(false);
+        sounds.PlayRespawnSound();
     }
 
     private void OnInteractableFound()

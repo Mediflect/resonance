@@ -48,5 +48,6 @@ public class Respawnable : MonoBehaviour
         transform.position = currentRespawn.spawnTransform.position;
         transform.rotation = currentRespawn.spawnTransform.rotation;
         Respawned?.Invoke();
+        isDead = false;
     }
 }

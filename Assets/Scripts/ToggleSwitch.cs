@@ -15,8 +15,13 @@ public class ToggleSwitch : MonoBehaviour
     public GameObject onLight;
     public GameObject offLight;
 
+    [Header("Sounds")]
+    public PitchRandomizer onSound;
+    public PitchRandomizer offSound;
+
     private Coroutine toggleCoroutine = null;
 
+    [ContextMenu("Toggle")]
     public void Toggle()
     {
         if (toggleCoroutine != null)
@@ -29,7 +34,6 @@ public class ToggleSwitch : MonoBehaviour
 
     private void Awake()
     {
-        
         if (isOn)
         {
             handleObj.position =  handleOffTarget.position;
@@ -55,11 +59,13 @@ public class ToggleSwitch : MonoBehaviour
         SetLight();
         if (isOn)
         {
+            onSound.Play();
             TurnedOn.Invoke();
             yield return Helpers.RunSmoothMoveTo(handleObj, handleOffTarget, handleOnTarget, handleTransitionTime);
         }
         else
         {
+            offSound.Play();
             TurnedOff.Invoke();
             yield return Helpers.RunSmoothMoveTo(handleObj, handleOnTarget, handleOffTarget, handleTransitionTime);
         }

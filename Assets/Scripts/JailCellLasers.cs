@@ -22,11 +22,11 @@ public class JailCellLasers : MonoBehaviour
 
     private void OnAppExists()
     {
+        App.Cycle.Cycle3 += OnCycle3;
         App.Cycle.Cycle2 += OnCycle2;
-        App.Cycle.Cycle1 += OnCycle1;
     }
 
-    private void OnCycle2()
+    private void OnCycle3()
     {
         if (isPowered)
         {
@@ -34,7 +34,7 @@ public class JailCellLasers : MonoBehaviour
         }
     }
 
-    private void OnCycle1()
+    private void OnCycle2()
     {
         if (isPowered)
         {
