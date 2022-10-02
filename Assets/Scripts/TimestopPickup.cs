@@ -49,7 +49,9 @@ public class TimestopPickup : MonoBehaviour
 
         App.Cycle.Pause();
         player.controls.enabled = false;
+
         yield return YieldInstructionCache.WaitForSeconds(holdTime);
+
         player.controls.enabled = true;
         App.Cycle.Resume();
 

@@ -67,7 +67,7 @@ public class Cycle : MonoBehaviour
         if (timer <= 0)
         {
             isDelaying = false;
-            timer = duration;
+            timer += duration;
             CycleStarted?.Invoke();
         }
     }
