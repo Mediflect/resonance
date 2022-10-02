@@ -772,7 +772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effects: {fileID: 7348079358931667341}
-  isUnlocked: 1
+  isUnlocked: 0
 --- !u!114 &7348079358931667341
 MonoBehaviour:
   m_ObjectHideFlags: 0
