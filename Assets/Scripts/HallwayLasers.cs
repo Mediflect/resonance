@@ -16,17 +16,16 @@ public class HallwayLasers : MonoBehaviour
     private void OnAppExists()
     {
         App.Cycle.CycleStarted += OnCycleStart;
+        App.Cycle.Cycle7 += OnCycle7;
     }
 
     private void OnCycleStart()
     {
-        StartCoroutine(RunShootLasers());
+        SetLasersActive(true);
     }
 
-    private IEnumerator RunShootLasers()
+    private void OnCycle7()
     {
-        SetLasersActive(true);
-        yield return YieldInstructionCache.WaitForSeconds(3f);
         SetLasersActive(false);
     }
 

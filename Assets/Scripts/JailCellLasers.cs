@@ -24,6 +24,7 @@ public class JailCellLasers : MonoBehaviour
     {
         App.Cycle.Cycle3 += OnCycle3;
         App.Cycle.Cycle2 += OnCycle2;
+        App.Cycle.Cycle1 += OnCycle1;
     }
 
     private void OnCycle3()
@@ -38,14 +39,12 @@ public class JailCellLasers : MonoBehaviour
     {
         if (isPowered)
         {
-            StartCoroutine(RunShootLasers());
+            SetLasersActive(true);
         }
     }
 
-    private IEnumerator RunShootLasers()
+    private void OnCycle1()
     {
-        SetLasersActive(true);
-        yield return YieldInstructionCache.WaitForSeconds(0.9f);
         SetLasersActive(false);
     }
 

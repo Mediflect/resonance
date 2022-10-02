@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -17,7 +18,7 @@ public class TimestopFX : MonoBehaviour
 
     private Coroutine currentCoroutine = null;
 
-    public void PlayEffects()
+    public Coroutine PlayEffectsCoroutine()
     {
         if (currentCoroutine != null)
         {
@@ -27,7 +28,7 @@ public class TimestopFX : MonoBehaviour
             App.TimestopEffectVolume.weight = 0;
             App.PreTimestopEffectVolume.weight = 0;
         }
-        currentCoroutine = StartCoroutine(RunEffects());
+        return StartCoroutine(RunEffects());
     }
 
     private IEnumerator RunEffects()

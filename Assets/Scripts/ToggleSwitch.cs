@@ -28,7 +28,7 @@ public class ToggleSwitch : MonoBehaviour
         {
             return;
         }
-        
+
         toggleCoroutine = StartCoroutine(RunToggle());
     }
 
@@ -36,40 +36,62 @@ public class ToggleSwitch : MonoBehaviour
     {
         if (isOn)
         {
-            handleObj.position =  handleOffTarget.position;
-            TurnedOn.Invoke();
+            handleObj.position = handleOffTarget.position;
         }
         else
         {
             handleObj.position = handleOffTarget.position;
-            TurnedOff.Invoke();
         }
-        SetLight();
+        InvokeStateChange(playSounds: false);
     }
 
-    private void SetLight()
-    {
-        onLight.SetActive(isOn);
-        offLight.SetActive(!isOn);
-    }
 
     private IEnumerator RunToggle()
     {
         isOn = !isOn;
-        SetLight();
+        StartCoroutine(RunHandleMove());
+        while (App.Cycle.IsPaused)
+        {
+            Debug.Log("waiting for cycle");
+            yield return null;
+        }
+        InvokeStateChange(playSounds: true);
+
+        toggleCoroutine = null;
+    }
+
+    private IEnumerator RunHandleMove()
+    {
         if (isOn)
         {
-            onSound.Play();
-            TurnedOn.Invoke();
             yield return Helpers.RunSmoothMoveTo(handleObj, handleOffTarget, handleOnTarget, handleTransitionTime);
         }
         else
         {
-            offSound.Play();
-            TurnedOff.Invoke();
             yield return Helpers.RunSmoothMoveTo(handleObj, handleOnTarget, handleOffTarget, handleTransitionTime);
         }
+    }
 
-        toggleCoroutine = null;
+    private void InvokeStateChange(bool playSounds)
+    {
+        onLight.SetActive(isOn);
+        offLight.SetActive(!isOn);
+        if (isOn)
+        {
+            if (playSounds)
+            {
+                onSound.Play();
+            }
+            TurnedOn.Invoke();
+
+        }
+        else
+        {
+            if (playSounds)
+            {
+                offSound.Play();
+            }
+            TurnedOff.Invoke();
+        }
     }
 }

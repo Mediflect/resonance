@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Cycle : MonoBehaviour
 {
+    public event Action CyclePaused;
+    public event Action CycleResumed;
     public event Action CycleStarted;
     public event Action Cycle9;
     public event Action Cycle8;
@@ -17,13 +19,28 @@ public class Cycle : MonoBehaviour
     public event Action Cycle1;
 
 
+    public bool IsPaused => !this.enabled;
     public float duration = 10f;
     public float startDelay = 2f;
     public float timer { get; private set; } = 0f;
 
     private bool isDelaying = false;
 
-    private void OnEnable()
+    [ContextMenu("Pause")]
+    public void Pause()
+    {
+        enabled = false;
+        CyclePaused?.Invoke();
+    }
+
+    [ContextMenu("Resume")]
+    public void Resume()
+    {
+        enabled = true;
+        CycleResumed?.Invoke();
+    }
+
+    private void Awake()
     {
         timer = startDelay;
         isDelaying = true;

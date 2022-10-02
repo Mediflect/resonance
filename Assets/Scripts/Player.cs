@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public CameraEffects cameraEffects;
     public InteractRaycaster interactRaycaster;
     public PlayerSounds sounds;
+    public TimestopPower timestopPower;
 
     public void SetSpawnPoint(RespawnPoint point)
     {
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour
 
     private void OnPowerActivated()
     {
-        cameraEffects.PlayTimestopEffect();
+        timestopPower.Activate();
     }
 
     private void OnKilled()
