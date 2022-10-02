@@ -12,9 +12,6 @@ public class App : MonoBehaviour
     public static Cycle Cycle => Instance.cycle;
     public Cycle cycle;
 
-    public static Player Player => Instance.player;
-    public Player player;
-
     private static List<Action> requestsForApp = new List<Action>();
 
     public static void Request(Action onAppExists)

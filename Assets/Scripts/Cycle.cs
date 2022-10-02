@@ -18,20 +18,15 @@ public class Cycle : MonoBehaviour
 
 
     public float duration = 10f;
-    public bool startOnAwake = true;
-
+    public float startDelay = 2f;
     public float timer { get; private set; } = 0f;
 
-    private void Awake()
+    private bool isDelaying = false;
+
+    private void OnEnable()
     {
-        if (startOnAwake)
-        {
-            timer = 0;
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
+        timer = startDelay;
+        isDelaying = true;
     }
 
     private void Update()
@@ -39,18 +34,22 @@ public class Cycle : MonoBehaviour
         float oldTimer = timer;
         timer -= Time.deltaTime;
 
-        CheckSecondEvent(9f, Cycle9, timer, oldTimer);
-        CheckSecondEvent(8f, Cycle8, timer, oldTimer);
-        CheckSecondEvent(7f, Cycle7, timer, oldTimer);
-        CheckSecondEvent(6f, Cycle6, timer, oldTimer);
-        CheckSecondEvent(5f, Cycle5, timer, oldTimer);
-        CheckSecondEvent(4f, Cycle4, timer, oldTimer);
-        CheckSecondEvent(3f, Cycle3, timer, oldTimer);
-        CheckSecondEvent(2f, Cycle2, timer, oldTimer);
-        CheckSecondEvent(1f, Cycle1, timer, oldTimer);
+        if (!isDelaying)
+        {
+            CheckSecondEvent(9f, Cycle9, timer, oldTimer);
+            CheckSecondEvent(8f, Cycle8, timer, oldTimer);
+            CheckSecondEvent(7f, Cycle7, timer, oldTimer);
+            CheckSecondEvent(6f, Cycle6, timer, oldTimer);
+            CheckSecondEvent(5f, Cycle5, timer, oldTimer);
+            CheckSecondEvent(4f, Cycle4, timer, oldTimer);
+            CheckSecondEvent(3f, Cycle3, timer, oldTimer);
+            CheckSecondEvent(2f, Cycle2, timer, oldTimer);
+            CheckSecondEvent(1f, Cycle1, timer, oldTimer);
+        }
 
         if (timer <= 0)
         {
+            isDelaying = false;
             timer = duration;
             CycleStarted?.Invoke();
         }
@@ -58,7 +57,7 @@ public class Cycle : MonoBehaviour
 
     private void CheckSecondEvent(float second, Action callback, float timer, float oldTimer)
     {
-        if(oldTimer > second && timer < second)
+        if (oldTimer > second && timer < second)
         {
             callback?.Invoke();
         }

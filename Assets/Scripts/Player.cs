@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Respawnable respawnable;
     public CameraEffects cameraEffects;
     public InteractRaycaster interactRaycaster;
+    public PlayerSounds sounds;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
         controls.enabled = false;
         interactRaycaster.enabled = false;
         cameraEffects.SetDeathEffectActive(true);
+        sounds.PlayDeathSound();
     }
 
     private void OnRespawned()
