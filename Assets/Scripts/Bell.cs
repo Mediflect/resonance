@@ -8,6 +8,7 @@ public class Bell : MonoBehaviour
     public AnimationCurve strikeCurve;
     public float strikeEffectDuration = 3f;
     public float strikeRotateDegrees = 45f;
+    public Transform lookAtTransform;
 
     private Coroutine strikeCoroutine = null;
 
@@ -17,7 +18,12 @@ public class Bell : MonoBehaviour
         {
             return;
         }
-        StartCoroutine(RunStrike(strikePos));
+        strikeCoroutine = StartCoroutine(RunStrike(strikePos));
+    }
+
+    private void Update()
+    {
+        return;
     }
 
     private IEnumerator RunStrike(Vector3 strikePos)
@@ -27,7 +33,7 @@ public class Bell : MonoBehaviour
         Vector3 rotationAxis = Vector3.Cross(strikeDir, Vector3.up);  // damn i was almost right the first time
         Quaternion fullRotation = startRotation * Quaternion.AngleAxis(strikeRotateDegrees, rotationAxis);
         float timer = 0f;
-        while (timer != strikeEffectDuration)
+        while (timer < strikeEffectDuration)
         {
             if (!enabled)
             {
@@ -42,7 +48,6 @@ public class Bell : MonoBehaviour
         }
         transform.rotation = startRotation;
         strikeCoroutine = null;
-        yield break;
     }
 
     [ContextMenu("Test Strike")]
