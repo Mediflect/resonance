@@ -51,16 +51,16 @@ public class App : MonoBehaviour
         }
         requestsForApp.Clear();
 
-        cycle.CycleStarted += () => Debug.Log("cycle: 10");
-        cycle.Cycle9 += () => Debug.Log("cycle: 9");
-        cycle.Cycle8 += () => Debug.Log("cycle: 8");
-        cycle.Cycle7 += () => Debug.Log("cycle: 7");
-        cycle.Cycle6 += () => Debug.Log("cycle: 6");
-        cycle.Cycle5 += () => Debug.Log("cycle: 5");
-        cycle.Cycle4 += () => Debug.Log("cycle: 4");
-        cycle.Cycle3 += () => Debug.Log("cycle: 3");
-        cycle.Cycle2 += () => Debug.Log("cycle: 2");
-        cycle.Cycle1 += () => Debug.Log("cycle: 1");
+        // cycle.CycleStarted += () => Debug.Log("cycle: 10");
+        // cycle.Cycle9 += () => Debug.Log("cycle: 9");
+        // cycle.Cycle8 += () => Debug.Log("cycle: 8");
+        // cycle.Cycle7 += () => Debug.Log("cycle: 7");
+        // cycle.Cycle6 += () => Debug.Log("cycle: 6");
+        // cycle.Cycle5 += () => Debug.Log("cycle: 5");
+        // cycle.Cycle4 += () => Debug.Log("cycle: 4");
+        // cycle.Cycle3 += () => Debug.Log("cycle: 3");
+        // cycle.Cycle2 += () => Debug.Log("cycle: 2");
+        // cycle.Cycle1 += () => Debug.Log("cycle: 1");
 
     }
 }
