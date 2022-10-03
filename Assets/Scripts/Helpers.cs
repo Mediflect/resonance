@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Medi;
 using UnityEngine.Rendering;
+using TMPro;
+using UnityEngine.UI;
 
 public static class Helpers
 {
@@ -27,14 +29,69 @@ public static class Helpers
             float tValue = Mathf.InverseLerp(0, duration, timer);
             if (smooth)
             {
-                volume.weight = Mathf.SmoothStep(startWeight, endWeight, tValue);
+                Mathf.SmoothStep(startWeight, endWeight, tValue);
             }
-            else
-            {
-                volume.weight = tValue;
-            }
+
+            volume.weight = Mathf.Lerp(startWeight, endWeight, tValue);
             yield return null;
             timer += Time.deltaTime;
         }
+    }
+
+    public static IEnumerator RunTextFade(TextMeshProUGUI text, float duration, bool fadeIn, bool smooth = true)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            float tValue = Mathf.InverseLerp(0, duration, timer);
+            if (smooth)
+            {
+                tValue = Mathf.SmoothStep(0, 1, tValue);
+            }
+
+            SetTextAlpha(text, fadeIn ? tValue : 1 - tValue);
+            yield return null;
+            timer += Time.deltaTime;
+        }
+    }
+
+    public static IEnumerator RunAudioFade(AudioSource source, float duration, float startVolume, float endVolume)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            float tValue = Mathf.InverseLerp(0, duration, timer);
+            source.volume = Mathf.Lerp(startVolume, endVolume, tValue);
+
+            yield return null;
+            timer += Time.deltaTime;
+        }
+    }
+
+    public static void SetTextAlpha(TextMeshProUGUI text, float alpha)
+    {
+        text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
+    }
+
+    public static IEnumerator RunImageFade(RawImage image, float duration, float startAlpha, float endAlpha, bool smooth = true)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            float tValue = Mathf.InverseLerp(0, duration, timer);
+            if (smooth)
+            {
+                tValue = Mathf.SmoothStep(0, 1, tValue);
+            }
+
+            SetImageAlpha(image, Mathf.Lerp(startAlpha, endAlpha, tValue));
+            yield return null;
+            timer += Time.deltaTime;
+        }
+    }
+
+    public static void SetImageAlpha(RawImage image, float alpha)
+    {
+        image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
     }
 }

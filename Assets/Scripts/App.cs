@@ -19,6 +19,9 @@ public class App : MonoBehaviour
     public static Volume PreTimestopEffectVolume => Instance.preTimestopEffectVolume;
     public Volume preTimestopEffectVolume;
 
+    public static Volume BlackFadeVolume => Instance.blackFadeVolume;
+    public Volume blackFadeVolume;
+
     private static List<Action> requestsForApp = new List<Action>();
 
     public static void Request(Action onAppExists)
@@ -37,7 +40,8 @@ public class App : MonoBehaviour
     {
         if (Instance != null)
         {
-            Debug.LogError("Multiple apps exist!!!");
+            Destroy(gameObject);
+            return;
         }
         Instance = this;
         foreach(Action existsCallback in requestsForApp)
