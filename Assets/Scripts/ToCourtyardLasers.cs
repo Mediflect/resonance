@@ -16,17 +16,16 @@ public class ToCourtyardLasers : MonoBehaviour
     private void OnAppExists()
     {
         App.Cycle.CycleStarted += OnCycleStart;
+        App.Cycle.Cycle9 += OnCycle9;
     }
 
     private void OnCycleStart()
     {
-        StartCoroutine(RunDisableLasers());
+        SetLasersActive(false);
     }
 
-    private IEnumerator RunDisableLasers()
+    private void OnCycle9()
     {
-        SetLasersActive(false);
-        yield return YieldInstructionCache.WaitForSeconds(1f);
         SetLasersActive(true);
     }
 

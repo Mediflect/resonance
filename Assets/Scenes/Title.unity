@@ -162,7 +162,7 @@ MonoBehaviour:
   subtitleDelay: 1.5
   exitTransitionTime: 5
   gameSceneName: castle
-  goToGameImmediately: 1
+  goToGameImmediately: 0
 --- !u!4 &26539734
 Transform:
   m_ObjectHideFlags: 0
