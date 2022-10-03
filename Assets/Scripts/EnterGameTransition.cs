@@ -9,6 +9,9 @@ public class EnterGameTransition : MonoBehaviour
     public ToastHint introNoticeHint;
     public ToastHint movementTutorialHint;
 
+    [Header("DEBUG")]
+    public bool skippySkip = false;
+
     private void Awake()
     {
         App.Request(() => StartCoroutine(RunEnterTransition()));
@@ -17,13 +20,17 @@ public class EnterGameTransition : MonoBehaviour
 
     private IEnumerator RunEnterTransition()
     {
-        yield return Helpers.RunVolumeWeightTransition(App.BlackFadeVolume, fadeInDuration, 1, 0, smooth: false);
-        player.toastHintSystem.QueueHint(introNoticeHint);
-        while (player.toastHintSystem.IsPlayingHint)
+        if (!skippySkip)
         {
-            yield return null;
+            yield return Helpers.RunVolumeWeightTransition(App.BlackFadeVolume, fadeInDuration, 1, 0, smooth: false);
+            player.toastHintSystem.QueueHint(introNoticeHint);
+            while (player.toastHintSystem.IsPlayingHint)
+            {
+                yield return null;
+            }
+            player.toastHintSystem.QueueHint(movementTutorialHint);
         }
-        player.toastHintSystem.QueueHint(movementTutorialHint);
+
         player.controls.enabled = true;
 
         while (player.controls.CurrentMotion == FPSControls.MotionType.Stationary)

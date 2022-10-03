@@ -60,7 +60,7 @@ public class TimestopPickup : MonoBehaviour
 
         yield return Helpers.RunVolumeWeightTransition(App.PreTimestopEffectVolume, outTransitionTime, 1, 0);
 
-        player.timestopPower.isUnlocked = true;
+        player.timestopPower.Unlock();
         player.toastHintSystem.QueueHint(tutorialHint);
     }
 }
