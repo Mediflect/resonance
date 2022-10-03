@@ -34,7 +34,7 @@ public class RespawnPoint : MonoBehaviour
 
     private void OnInteraction(Player player)
     {
-        player.SetSpawnPoint(this);
+        player.SetSpawnPoint(this, playSound: true);
     }
 
     [ContextMenu("RefreshState")]

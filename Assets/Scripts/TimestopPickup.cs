@@ -8,6 +8,7 @@ public class TimestopPickup : MonoBehaviour
     public Transform geoTransform;
     public Interactable interactable;
     public RespawnPoint respawn;
+    public LaserGroup lasers;
     public float shakeTransitionTime = 2f;
     public float shakeMaxValue = 0.2f;
     public float holdTime = 2f;
@@ -53,6 +54,7 @@ public class TimestopPickup : MonoBehaviour
         yield return YieldInstructionCache.WaitForSeconds(holdTime);
 
         player.controls.enabled = true;
+        lasers.SetLasersActive(true);
         App.Cycle.Resume();
 
         yield return Helpers.RunVolumeWeightTransition(App.PreTimestopEffectVolume, outTransitionTime, 1, 0);

@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public PlayerSounds sounds;
     public TimestopPower timestopPower;
 
-    public void SetSpawnPoint(RespawnPoint point)
+    public void SetSpawnPoint(RespawnPoint point, bool playSound = false)
     {
         if (respawnable.currentRespawn == point)
         {
