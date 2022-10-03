@@ -161,7 +161,7 @@ MonoBehaviour:
   subtitleFadeTime: 2.5
   subtitleDelay: 1.5
   exitTransitionTime: 5
-  gameSceneName: castle
+  gameSceneName: Exposition
   goToGameImmediately: 0
 --- !u!4 &26539734
 Transform:
