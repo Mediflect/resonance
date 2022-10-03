@@ -6,6 +6,7 @@ using UnityEngine;
 public class ToastHint : ScriptableObject
 {
     public bool endWithFade = true;
+    public bool playAudioOnStart = true;
 
     [TextArea]
     public List<string> lines;

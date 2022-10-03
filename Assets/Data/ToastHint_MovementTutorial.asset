@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: ToastHint_MovementTutorial
   m_EditorClassIdentifier: 
   endWithFade: 1
+  playAudioOnStart: 0
   lines:
   - '<look with the mouse><long>
 
     <use WASD to move><long>
 
-    <hold Shift
-    to sprint><long>'
+    <hold Shift to
+    sprint><long>'
