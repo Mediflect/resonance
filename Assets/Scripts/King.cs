@@ -23,6 +23,8 @@ public class King : MonoBehaviour
     public Transform moveSlerpOrigin;
     public float moveSpeed = 2.5f;
     public Transform phase2KingPos;
+    public bool isAvoidingPlayer = false;
+    public Transform phase3KingPos;
 
 
     [Header("Lights")]
@@ -51,11 +53,15 @@ public class King : MonoBehaviour
         {
             lightMaterial.SetColor(EMISSION_PROP, woundedLightColor);
             StartCoroutine(RunHurt());
+            MoveToPosition(phase2KingPos);
+            // activate lasers
         }
         else if (hitsLeftToKill == 1)
         {
             lightMaterial.SetColor(EMISSION_PROP, aboutToDieLightColor);
             StartCoroutine(RunHurt());
+            MoveToPosition(phase3KingPos);
+            isAvoidingPlayer = true;
         }
         else
         {
@@ -157,6 +163,12 @@ public class King : MonoBehaviour
 
             while (transform.position != currentMoveTarget)
             {
+                if (App.Cycle.IsPaused)
+                {
+                    // don't move during timestop lol
+                    yield return null;
+                    continue;
+                }
                 transform.position = Vector3.MoveTowards(transform.position, currentMoveTarget, moveSpeed * Time.deltaTime);
                 yield return null;
             }

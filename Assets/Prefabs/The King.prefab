@@ -11715,7 +11715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650515387955216689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.04, z: -0.073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11733,7 +11733,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.64}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3067063399188569957
 Rigidbody:
@@ -12966,12 +12966,17 @@ MonoBehaviour:
   - {fileID: 4186951301205880776}
   damageEffectDuration: 1
   damageShakeAmplitude: 0.5
-  deathEffectDuration: 5
+  deathEffectDuration: 4.4
   deathShakeAmplitude: 1
   deathUpVelocity: 5
   deathVelocityVariance: 1
   deathTorque: 5
   fallDuration: 5
+  moveSlerpOrigin: {fileID: 0}
+  moveSpeed: 2.5
+  phase2KingPos: {fileID: 0}
+  isAvoidingPlayer: 0
+  phase3KingPos: {fileID: 0}
   lightMaterial: {fileID: 2100000, guid: 01587bbfde01f4343aec82ebeaaeb8b2, type: 2}
   healthyLightColor: {r: 4.885954, g: 4.2894735, b: 1.7906637, a: 1}
   woundedLightColor: {r: 5.7846637, g: 2.228047, b: 0.68215364, a: 1}
