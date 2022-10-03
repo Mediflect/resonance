@@ -7,6 +7,8 @@ public class King : MonoBehaviour
 {
     private const string EMISSION_PROP = "_EmissionColor";
 
+    public event System.Action Defeated;
+
     public Bell bell;
     public Transform shakeTransform;
     public List<Rigidbody> rigidbodies;
@@ -136,7 +138,7 @@ public class King : MonoBehaviour
             rb.AddTorque(Random.insideUnitSphere * deathTorque, ForceMode.VelocityChange);
         }
         yield return YieldInstructionCache.WaitForSeconds(fallDuration);
-        Debug.Log("king has died");
+        Defeated?.Invoke();
     }
 
     private IEnumerator RunMove(Vector3 targetPos)
@@ -175,5 +177,12 @@ public class King : MonoBehaviour
         }
 
         moveCoroutine = null;
+    }
+
+    [ContextMenu("Die like, immediately")]
+    private void DebugDieImmediately()
+    {
+        hitsLeftToKill = 1;
+        TakeDamage();
     }
 }

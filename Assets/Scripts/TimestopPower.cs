@@ -10,7 +10,7 @@ public class TimestopPower : MonoBehaviour
 
     public void Activate()
     {
-        if (isUnlocked && currentCoroutine == null)
+        if (isUnlocked && currentCoroutine == null && !App.Cycle.IsStopped)
         {
             StartCoroutine(RunPower());
         }

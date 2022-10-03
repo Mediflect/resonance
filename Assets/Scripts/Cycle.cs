@@ -25,6 +25,7 @@ public class Cycle : MonoBehaviour
     public float duration = 10f;
     public float startDelay = 2f;
     public float timer { get; private set; } = 0f;
+    public int totalCycles = -1;    // -1 because the first one bumps to 0 on start
 
     private bool isDelaying = false;
 
@@ -89,6 +90,7 @@ public class Cycle : MonoBehaviour
             isDelaying = false;
             timer += duration;
             CycleStarted?.Invoke();
+            ++totalCycles;
         }
     }
 
