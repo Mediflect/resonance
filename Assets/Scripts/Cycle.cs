@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Cycle : MonoBehaviour
 {
+    public event Action CycleStopped;
     public event Action CyclePaused;
     public event Action CycleResumed;
     public event Action CycleStarted;
@@ -20,6 +21,7 @@ public class Cycle : MonoBehaviour
 
 
     public bool IsPaused => !this.enabled;
+    public bool IsStopped { get; private set; } = false;
     public float duration = 10f;
     public float startDelay = 2f;
     public float timer { get; private set; } = 0f;
@@ -29,6 +31,11 @@ public class Cycle : MonoBehaviour
     [ContextMenu("Pause")]
     public void Pause()
     {
+        if (IsStopped)
+        {
+            Debug.LogWarning("cycle is stopped, game is over");
+            return;
+        }
         enabled = false;
         CyclePaused?.Invoke();
     }
@@ -36,8 +43,21 @@ public class Cycle : MonoBehaviour
     [ContextMenu("Resume")]
     public void Resume()
     {
+        if (IsStopped)
+        {
+            Debug.LogWarning("can't resume a stopped cycle, game is over");
+            return;
+        }
         enabled = true;
         CycleResumed?.Invoke();
+    }
+
+    public void Stop()
+    {
+        Debug.Log("cycle has stopped, game is over");
+        IsStopped = true;
+        enabled = false;
+        CycleStopped?.Invoke();
     }
 
     private void Awake()

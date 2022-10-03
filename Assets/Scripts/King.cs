@@ -1,6 +1,7 @@
 using UnityEngine;
 using Medi;
 using System.Collections;
+using System.Collections.Generic;
 
 public class King : MonoBehaviour
 {
@@ -8,10 +9,15 @@ public class King : MonoBehaviour
 
     public Bell bell;
     public Transform shakeTransform;
+    public List<Rigidbody> rigidbodies;
     public float damageEffectDuration = 1f;
     public float damageShakeAmplitude = 0.5f;
     public float deathEffectDuration = 5f;
     public float deathShakeAmplitude = 1f;
+    public float deathUpVelocity = 1f;
+    public float deathVelocityVariance = 0.05f;
+    public float deathTorque = 5f;
+    public float fallDuration = 5f;
 
     [Header("Lights")]
     public Material lightMaterial;
@@ -90,9 +96,19 @@ public class King : MonoBehaviour
 
     private IEnumerator RunDeath()
     {
+        App.Cycle.Stop();
         deathSound.Play();
         yield return Helpers.RunDecayingPositionNoise(shakeTransform, deathEffectDuration, deathShakeAmplitude, reverse: true);
         lightMaterial.SetColor("_EmissionColor", deadColor);
+        foreach(Rigidbody rb in rigidbodies)
+        {
+            rb.isKinematic = false;
+            float deathSpeed = Random.Range(deathUpVelocity - deathVelocityVariance, deathUpVelocity + deathVelocityVariance);
+            rb.AddForce(Vector3.up * deathSpeed, ForceMode.VelocityChange);
+            rb.AddTorque(Random.insideUnitSphere * deathTorque, ForceMode.VelocityChange);
+        }
+        yield return YieldInstructionCache.WaitForSeconds(fallDuration);
+        Debug.Log("king has died");
     }
 
     [ContextMenu("Heal")]

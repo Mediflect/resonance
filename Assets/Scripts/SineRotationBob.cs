@@ -44,7 +44,7 @@ public class SineRotationBob : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.localRotation = baseRotation;
+        // transform.localRotation = baseRotation;
     }
 
     private void Update()

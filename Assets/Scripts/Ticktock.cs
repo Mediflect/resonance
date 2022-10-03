@@ -24,7 +24,10 @@ public class Ticktock : MonoBehaviour
         if (timer > 1f)
         {
             timer -= 1f;
-            sound.Play();
+            if (!App.Cycle.IsStopped)
+            {
+                sound.Play();
+            }
         }
     }
 }
