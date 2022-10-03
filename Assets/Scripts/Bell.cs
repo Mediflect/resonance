@@ -29,6 +29,11 @@ public class Bell : MonoBehaviour
         float timer = 0f;
         while (timer != strikeEffectDuration)
         {
+            if (!enabled)
+            {
+                yield return null;
+                continue;
+            }
             float tValue = Mathf.InverseLerp(0, strikeEffectDuration, timer);
             tValue = strikeCurve.Evaluate(tValue);
             transform.rotation = Quaternion.SlerpUnclamped(startRotation, fullRotation, tValue);
