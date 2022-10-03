@@ -16,8 +16,7 @@ public class EnterGameTransition : MonoBehaviour
     private IEnumerator RunEnterTransition()
     {
         StartCoroutine(Helpers.RunVolumeWeightTransition(App.BlackFadeVolume, fadeInDuration, 1, 0, smooth: false));
-        yield return YieldInstructionCache.WaitForSeconds(fadeInDuration - App.Cycle.startDelay);
-        yield return YieldInstructionCache.WaitForSeconds(App.Cycle.startDelay);
+        yield return YieldInstructionCache.WaitForSeconds(fadeInDuration);
         player.controls.enabled = true;
 
         // show movement controls

@@ -92,14 +92,18 @@ public class King : MonoBehaviour
         lightMaterial.SetColor(EMISSION_PROP, healthyLightColor);
     }
 
-    private void OnDestroy()
-    {
-        lightMaterial.SetColor(EMISSION_PROP, healthyLightColor);
-    }
-
     private void OnAppExists()
     {
         App.Cycle.CycleStarted += OnCycleStarted;
+    }
+
+    private void OnDestroy()
+    {
+        lightMaterial.SetColor(EMISSION_PROP, healthyLightColor);
+        if (App.Exists)
+        {
+            App.Cycle.CycleStarted -= OnCycleStarted;
+        }
     }
 
     private void Update()
@@ -113,7 +117,6 @@ public class King : MonoBehaviour
 
     private void OnCycleStarted()
     {
-        Debug.Log("strike");
         bell.StrikeFromPoint(transform.position);
         // shoot a laser or something idk
     }

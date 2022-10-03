@@ -9,6 +9,7 @@ using UnityEngine.Rendering;
 public class App : MonoBehaviour
 {
     private static App Instance = null;
+    public static bool Exists => Instance != null;
 
     public static Cycle Cycle => Instance.cycle;
     public Cycle cycle;
