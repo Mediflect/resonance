@@ -11,7 +11,7 @@ public class JailCellLasers : MonoBehaviour
     public void SetPowered(bool powered)
     {
         isPowered = powered;
-        Debug.Log("Cell lasers powered changed to " + powered);
+        // Debug.Log("Cell lasers powered changed to " + powered);
     }
 
     private void Awake()
@@ -31,7 +31,7 @@ public class JailCellLasers : MonoBehaviour
     {
         if (isPowered)
         {
-            Debug.Log("cell lasers powering up");
+            // Debug.Log("cell lasers powering up");
         }
     }
 
