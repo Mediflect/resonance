@@ -94,4 +94,23 @@ public static class Helpers
     {
         image.color = new Color(image.color.r, image.color.g, image.color.b, alpha);
     }
+
+    public static IEnumerator RunDecayingPositionNoise(Transform transform, float duration, float noiseAmplitude, bool reverse = false)
+    {
+        Vector3 basePos = transform.localPosition;
+        float timer = 0;
+        while (timer < duration)
+        {
+            float tValue = Mathf.InverseLerp(0, duration, timer);
+            float shakeAmplitude = Mathf.Lerp(noiseAmplitude, 0, tValue);
+            if (reverse)
+            {
+                shakeAmplitude = Mathf.Lerp(0, noiseAmplitude, tValue);
+            }
+            transform.localPosition = new Vector3(Random.value * shakeAmplitude, Random.value * shakeAmplitude, Random.value * shakeAmplitude);
+            yield return null;
+            timer += Time.deltaTime;
+        }
+        transform.localPosition = basePos;
+    }
 }

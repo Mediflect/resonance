@@ -16,19 +16,7 @@ public class SineRotationBob : MonoBehaviour
 
     private void Awake()
     {
-        baseRotation = transform.rotation;
-        switch (bobAxis)
-        {
-            case Axis.x:
-                rotationAxis = transform.right;
-                break;
-            case Axis.y:
-                rotationAxis = transform.up;
-                break;
-            case Axis.z:
-                rotationAxis = transform.forward;
-                break;
-        }
+        
     }
 
     private void OnEnable()
@@ -38,15 +26,29 @@ public class SineRotationBob : MonoBehaviour
             Debug.LogWarning("No pulse is assigned");
             enabled = false;
         }
+
+        baseRotation = transform.localRotation;
+        switch (bobAxis)
+        {
+            case Axis.x:
+                rotationAxis = Vector3.right;
+                break;
+            case Axis.y:
+                rotationAxis = Vector3.up;
+                break;
+            case Axis.z:
+                rotationAxis = Vector3.forward;
+                break;
+        }
     }
 
     private void OnDisable()
     {
-        transform.rotation = baseRotation;
+        transform.localRotation = baseRotation;
     }
 
     private void Update()
     {
-        transform.rotation = baseRotation * Quaternion.AngleAxis(pulse.Value, rotationAxis);
+        transform.localRotation = baseRotation * Quaternion.AngleAxis(pulse.Value, rotationAxis);
     }
 }
