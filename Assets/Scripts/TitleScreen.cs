@@ -74,9 +74,8 @@ public class TitleScreen : MonoBehaviour
 
     private IEnumerator RunExitSequence()
     {
-
-        yield return Helpers.RunVolumeWeightTransition(App.BlackFadeVolume, exitTransitionTime, 0f, 1f);
         StartCoroutine(Helpers.RunAudioFade(ambienceAudio, exitTransitionTime, ambienceAudio.volume, 0f));
+        yield return Helpers.RunVolumeWeightTransition(App.BlackFadeVolume, exitTransitionTime, 0f, 1f, smooth: false);
         // load next scene
         SceneManager.LoadScene(gameSceneName);
     }
