@@ -19,6 +19,12 @@ public class King : MonoBehaviour
     public float deathTorque = 5f;
     public float fallDuration = 5f;
 
+    [Header("Phasing")]
+    public Transform moveSlerpOrigin;
+    public float moveSpeed = 2.5f;
+    public Transform phase2KingPos;
+
+
     [Header("Lights")]
     public Material lightMaterial;
     [ColorUsage(true, true)]
@@ -35,6 +41,7 @@ public class King : MonoBehaviour
     public AudioSource deathSound;
 
     private int hitsLeftToKill = 3;
+    private Coroutine moveCoroutine;
 
     [ContextMenu("Damage")]
     public void TakeDamage()
@@ -54,6 +61,21 @@ public class King : MonoBehaviour
         {
             StartCoroutine(RunDeath());
         }
+    }
+
+    public void MoveToPosition(Transform kingPos)
+    {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+        }
+        moveCoroutine = StartCoroutine(RunMove(kingPos.position));
+    }
+
+    [ContextMenu("TestMove")]
+    private void TestMove()
+    {
+        MoveToPosition(phase2KingPos);
     }
 
     private void Awake()
@@ -100,7 +122,7 @@ public class King : MonoBehaviour
         deathSound.Play();
         yield return Helpers.RunDecayingPositionNoise(shakeTransform, deathEffectDuration, deathShakeAmplitude, reverse: true);
         lightMaterial.SetColor("_EmissionColor", deadColor);
-        foreach(Rigidbody rb in rigidbodies)
+        foreach (Rigidbody rb in rigidbodies)
         {
             rb.isKinematic = false;
             float deathSpeed = Random.Range(deathUpVelocity - deathVelocityVariance, deathUpVelocity + deathVelocityVariance);
@@ -111,10 +133,35 @@ public class King : MonoBehaviour
         Debug.Log("king has died");
     }
 
-    [ContextMenu("Heal")]
-    private void DebugResetHealth()
+    private IEnumerator RunMove(Vector3 targetPos)
     {
-        hitsLeftToKill = 3;
-        lightMaterial.SetColor(EMISSION_PROP, healthyLightColor);
+        Vector3 startPos = transform.position;
+        Vector3 slerpStart = startPos - moveSlerpOrigin.position;
+        Vector3 slerpEnd = targetPos - moveSlerpOrigin.position;
+
+        const int SLERP_STEPS = 30;
+
+        for (int i = 0; i <= SLERP_STEPS; ++i)
+        {
+            float progress = (float)i / (float)SLERP_STEPS;
+            Vector3 currentMoveTarget;
+            if (i == SLERP_STEPS)
+            {
+                // i had these clauses swapped for like 30 minutes because i'm an idiot
+                currentMoveTarget = targetPos;
+            }
+            else
+            {
+                currentMoveTarget = moveSlerpOrigin.position + Vector3.Slerp(slerpStart, slerpEnd, progress);
+            }
+
+            while (transform.position != currentMoveTarget)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, currentMoveTarget, moveSpeed * Time.deltaTime);
+                yield return null;
+            }
+        }
+
+        moveCoroutine = null;
     }
 }
