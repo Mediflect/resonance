@@ -9,11 +9,14 @@ public class CameraEffects : MonoBehaviour
     public GameObject defaultReticle = null;
     public GameObject interactReticle = null;
     public TextMeshProUGUI interactPrompt;
+    public TextMeshProUGUI hintText;
 
     private IEnumerator Start()
     {
+        // hack to fix lag spike on load
         yield return null;
         interactPrompt.gameObject.SetActive(false);
+        hintText.gameObject.SetActive(false);
     }
 
     public void SetDeathEffectActive(bool active)
