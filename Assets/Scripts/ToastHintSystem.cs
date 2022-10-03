@@ -53,7 +53,7 @@ public class ToastHintSystem : MonoBehaviour
 
             if (toastHint.playAudioOnStart)
             {
-                StartCoroutine(Helpers.RunAudioFade(hintSound, fadeOutTime, 0, hintBaseVolume));
+                StartCoroutine(Helpers.RunAudioFade(hintSound, fadeOutTime/2f, 0, hintBaseVolume));
                 hintSound.Play();
             }
 

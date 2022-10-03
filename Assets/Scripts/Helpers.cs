@@ -8,11 +8,18 @@ using UnityEngine.UI;
 
 public static class Helpers
 {
-    public static IEnumerator RunSmoothMoveTo(Transform obj, Transform start, Transform end, float transitionTime)
+    public static IEnumerator RunSmoothMoveTo(Transform obj, Transform start, Transform end, float transitionTime, bool waitOnPause = false)
     {
         float timer = 0;
         while (timer < transitionTime)
         {
+            if (waitOnPause && App.Cycle.IsPaused)
+            {
+                // hack to make doors freeze during timestop properly
+                yield return null;
+                continue;
+            }
+
             float tValue = Mathf.InverseLerp(0, transitionTime, timer);
             float tValueSmoothed = Mathf.SmoothStep(0, 1, tValue);
             obj.position = Vector3.Lerp(start.position, end.position, tValueSmoothed);

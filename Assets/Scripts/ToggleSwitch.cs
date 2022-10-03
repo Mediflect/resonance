@@ -37,6 +37,11 @@ public class ToggleSwitch : MonoBehaviour
 
     private void Awake()
     {
+        App.Request(OnAppExists);
+    }
+
+    private void OnAppExists()
+    {
         if (isOn)
         {
             handleObj.position = handleOffTarget.position;

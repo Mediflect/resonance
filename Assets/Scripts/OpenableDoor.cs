@@ -9,6 +9,7 @@ public class OpenableDoor : MonoBehaviour
     public Transform doorClosedTarget;
     public GameObject blockerCollider;
     public float transitionTime = 1f;
+    public bool isOpen = false;
 
     private Coroutine changeStateCoroutine = null;
 
@@ -34,24 +35,28 @@ public class OpenableDoor : MonoBehaviour
 
     private IEnumerator RunOpen()
     {
+        isOpen = false;
         blockerCollider.SetActive(true);
         doorObjTransform.gameObject.SetActive(true);
 
-        yield return Helpers.RunSmoothMoveTo(doorObjTransform, doorClosedTarget, doorOpenTarget, transitionTime);
+        yield return Helpers.RunSmoothMoveTo(doorObjTransform, doorClosedTarget, doorOpenTarget, transitionTime, waitOnPause: true);
 
         doorObjTransform.gameObject.SetActive(false);
         blockerCollider.SetActive(false);
         changeStateCoroutine = null;
+        isOpen = true;
     }
 
     private IEnumerator RunClose()
     {
+        isOpen = true;
         blockerCollider.SetActive(true);
         doorObjTransform.gameObject.SetActive(true);
         float timer = transitionTime;
 
-        yield return Helpers.RunSmoothMoveTo(doorObjTransform, doorOpenTarget, doorClosedTarget, transitionTime);
+        yield return Helpers.RunSmoothMoveTo(doorObjTransform, doorOpenTarget, doorClosedTarget, transitionTime, waitOnPause: true);
 
         changeStateCoroutine = null;
+        isOpen = false;
     }
 }

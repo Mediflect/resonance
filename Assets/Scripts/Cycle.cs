@@ -18,6 +18,7 @@ public class Cycle : MonoBehaviour
     public event Action Cycle3;
     public event Action Cycle2;
     public event Action Cycle1;
+    public event Action AnyCycle;
 
 
     public bool IsPaused => !this.enabled;
@@ -99,6 +100,7 @@ public class Cycle : MonoBehaviour
         if (oldTimer > second && timer < second)
         {
             callback?.Invoke();
+            AnyCycle?.Invoke();
         }
     }
 }
