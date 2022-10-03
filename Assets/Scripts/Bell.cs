@@ -24,14 +24,16 @@ public class Bell : MonoBehaviour
     {
         Quaternion startRotation = transform.rotation;
         Vector3 strikeDir = strikePos.DirTo(transform.position).Flatten().normalized;
-        Vector3 rotationAxis = Vector3.Cross(strikeDir, Vector3.down);  // make sure this is correct...
+        Vector3 rotationAxis = Vector3.Cross(strikeDir, Vector3.up);  // damn i was almost right the first time
         Quaternion fullRotation = startRotation * Quaternion.AngleAxis(strikeRotateDegrees, rotationAxis);
         float timer = 0f;
         while (timer != strikeEffectDuration)
         {
             float tValue = Mathf.InverseLerp(0, strikeEffectDuration, timer);
             tValue = strikeCurve.Evaluate(tValue);
-            transform.rotation = Quaternion.Slerp(startRotation, fullRotation, tValue);
+            transform.rotation = Quaternion.SlerpUnclamped(startRotation, fullRotation, tValue);
+            yield return null;
+            timer += Time.deltaTime;
         }
         transform.rotation = startRotation;
         strikeCoroutine = null;
