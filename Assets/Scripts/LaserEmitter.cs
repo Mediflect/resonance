@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class LaserEmitter : MonoBehaviour
 {
-    public KillCollider killLaser;
+    public GameObject killLaser;
+    public bool isLaserActive => killLaser.activeInHierarchy;
     
     public void SetLaserActive(bool active)
     {
-        killLaser.gameObject.SetActive(active);
+        killLaser.SetActive(active);
     }
 }

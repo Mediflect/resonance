@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b1e8176a0f21d04ab336304d934033f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killLaser: {fileID: 6608770906053822703}
+  killLaser: {fileID: 2800902523091195937}
 --- !u!114 &8643588491990145876
 MonoBehaviour:
   m_ObjectHideFlags: 0

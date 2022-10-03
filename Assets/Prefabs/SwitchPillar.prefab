@@ -447,7 +447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8392190028398561974, guid: 859cdfb79939eea49b56ac7917c33230, type: 3}
       propertyPath: m_Name
-      value: RaftersSwitch
+      value: ToggleSwitch
       objectReference: {fileID: 0}
     - target: {fileID: 8392190028439512662, guid: 859cdfb79939eea49b56ac7917c33230, type: 3}
       propertyPath: m_VersionIndex
