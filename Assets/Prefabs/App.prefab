@@ -95,6 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 10
   startDelay: 0.5
+  totalCycles: -1
 --- !u!1 &3206772126800064041
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3206772126800064040}
   - component: {fileID: 3206772126800064047}
+  - component: {fileID: 3239765326756274450}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -148,6 +150,18 @@ MonoBehaviour:
   timestopEffectVolume: {fileID: 2440721143561367248}
   preTimestopEffectVolume: {fileID: 6120666494300178222}
   blackFadeVolume: {fileID: 3150211441491682}
+--- !u!114 &3239765326756274450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3206772126800064041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2195a27eda4b48c409d2888f3ee50f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4025950001896545764
 GameObject:
   m_ObjectHideFlags: 0
