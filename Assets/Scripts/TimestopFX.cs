@@ -12,9 +12,8 @@ public class TimestopFX : MonoBehaviour
     public float endTransitionDuration = 1f;
 
     [Header("Sounds")]
-    public AudioSource leadupSound;
+    public AudioSource sound;
     public float holdSoundDelay = 3.497f;
-    public AudioSource holdSound;
     public Ticktock ticktock;
 
     private Coroutine currentCoroutine = null;
@@ -24,8 +23,7 @@ public class TimestopFX : MonoBehaviour
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
-            leadupSound.Stop();
-            holdSound.Stop();
+            sound.Stop();
             App.TimestopEffectVolume.weight = 0;
             App.PreTimestopEffectVolume.weight = 0;
         }
@@ -34,25 +32,29 @@ public class TimestopFX : MonoBehaviour
 
     private IEnumerator RunEffects()
     {
-        StartCoroutine(RunStartSoundEffects());
+        float savedSoundVolume = sound.volume;
+        sound.Play();
 
         // In effect
         ticktock.isPaused = true;
         yield return RunVolumeWeightTransition(App.PreTimestopEffectVolume, preEffectDuration, 0, 1);
         App.PreTimestopEffectVolume.weight = 0;
         ticktock.timer = 0f; // skip the first one
-        ticktock.isPaused = false;
+        // ticktock.isPaused = false;
         yield return RunVolumeWeightTransition(App.TimestopEffectVolume, startTransitionDuration, 0.01f, 1);
 
         // Hold
         yield return YieldInstructionCache.WaitForSeconds(holdDuration);
 
         // Out effect
-        ticktock.isPaused = true;
+        // ticktock.isPaused = true;
         yield return RunVolumeWeightTransition(App.TimestopEffectVolume, endTransitionDuration / 2f, 1, 0.01f);
         App.TimestopEffectVolume.weight = 0f;
+        StartCoroutine(Helpers.RunAudioFade(sound, endTransitionDuration / 2f, sound.volume, 0));
         yield return RunVolumeWeightTransition(App.PreTimestopEffectVolume, endTransitionDuration / 2f, 1, 0);
-        holdSound.Stop();
+        sound.Stop();
+        sound.volume = savedSoundVolume;
+
         ticktock.isPaused = false;
         currentCoroutine = null;
     }
@@ -74,12 +76,5 @@ public class TimestopFX : MonoBehaviour
             yield return null;
             timer += Time.deltaTime;
         }
-    }
-
-    private IEnumerator RunStartSoundEffects()
-    {
-        leadupSound.Play();
-        yield return YieldInstructionCache.WaitForSeconds(holdSoundDelay);
-        holdSound.Play();
     }
 }
