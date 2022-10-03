@@ -3,17 +3,10 @@ using Medi;
 
 public class King : MonoBehaviour
 {
-    public bool isTitleScreenVersion = false;
     public Bell bell;
 
     private void Awake()
     {
-        if (isTitleScreenVersion)
-        {
-            enabled = false;
-            return;
-        }
-
         App.Request(OnAppExists);
     }
 
@@ -24,6 +17,10 @@ public class King : MonoBehaviour
 
     private void Update()
     {
+        if (bell == null)
+        {
+            return;
+        }
         transform.forward = transform.position.DirTo(bell.lookAtTransform.position);
     }
 
