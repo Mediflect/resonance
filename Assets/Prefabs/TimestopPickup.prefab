@@ -1443,6 +1443,7 @@ MonoBehaviour:
   shakeMaxValue: 0.2
   holdTime: 2
   outTransitionTime: 4
+  tutorialHint: {fileID: 11400000, guid: 7a496a1d98310a242b809305dec7c071, type: 2}
 --- !u!1 &2792176218500007379
 GameObject:
   m_ObjectHideFlags: 0

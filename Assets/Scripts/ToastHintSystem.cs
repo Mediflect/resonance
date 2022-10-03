@@ -5,6 +5,8 @@ using Medi;
 
 public class ToastHintSystem : MonoBehaviour
 {
+    public bool IsPlayingHint { get; private set; } = false;
+
     public float fadeOutTime = 2.5f;
     public Typewriter typewriter;
 
@@ -16,6 +18,10 @@ public class ToastHintSystem : MonoBehaviour
     public void QueueHint(ToastHint hint)
     {
         queuedHints.Enqueue(hint);
+        if (queuedHints.Count == 1)
+        {
+            IsPlayingHint = true;
+        }
     }
 
     private void OnEnable()
@@ -25,7 +31,7 @@ public class ToastHintSystem : MonoBehaviour
 
     private IEnumerator RunHintProcessing()
     {
-        while(true)
+        while (true)
         {
             if (queuedHints.Count < 1)
             {
@@ -33,11 +39,23 @@ public class ToastHintSystem : MonoBehaviour
                 continue;
             }
 
-            ToastHint hint = queuedHints.Dequeue();
-            typewriter.SetText(hint.hint);
-            typewriter.Play();
-            yield return typewriter.PlayCoroutine;
-            yield return Helpers.RunTextFade(typewriter.TextUi, fadeOutTime, fadeIn: false);
+            IsPlayingHint = true;
+            ToastHint toastHint = queuedHints.Dequeue();
+            foreach (string line in toastHint.lines)
+            {
+                typewriter.SetText(line);
+                typewriter.Play();
+                yield return typewriter.PlayCoroutine;
+            }
+
+            if (toastHint.endWithFade)
+            {
+                yield return Helpers.RunTextFade(typewriter.TextUi, fadeOutTime, fadeIn: false);
+            }
+
+            typewriter.Clear();
+            Helpers.SetTextAlpha(typewriter.TextUi, 1f);
+            IsPlayingHint = false;
         }
     }
 

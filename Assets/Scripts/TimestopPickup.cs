@@ -13,6 +13,7 @@ public class TimestopPickup : MonoBehaviour
     public float shakeMaxValue = 0.2f;
     public float holdTime = 2f;
     public float outTransitionTime = 2f;
+    public ToastHint tutorialHint;
 
     private void Awake()
     {
@@ -60,7 +61,6 @@ public class TimestopPickup : MonoBehaviour
         yield return Helpers.RunVolumeWeightTransition(App.PreTimestopEffectVolume, outTransitionTime, 1, 0);
 
         player.timestopPower.isUnlocked = true;
-        // play pop-up
-
+        player.toastHintSystem.QueueHint(tutorialHint);
     }
 }

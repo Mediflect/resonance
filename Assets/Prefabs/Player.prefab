@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e6a40ad64325d40aeec73474eed547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeOutTime: 5
+  fadeOutTime: 3.33
   typewriter: {fileID: 4537428989188471900}
-  testHint: {fileID: 11400000, guid: d5f6f38a807f97c4396a0f8848472c80, type: 2}
+  testHint: {fileID: 11400000, guid: af0d1407d9ed79f488a2e2d00b968c66, type: 2}
 --- !u!114 &4537428989188471900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +440,8 @@ MonoBehaviour:
   interactRaycaster: {fileID: 4133494502085693810}
   sounds: {fileID: 5917158917475480196}
   timestopPower: {fileID: 751985933094488183}
+  toastHintSystem: {fileID: 4801569186020790735}
+  interactableHint: {fileID: 11400000, guid: 1577eca5b6e978b4a9cdc89376e7c8d8, type: 2}
 --- !u!114 &589759370195811391
 MonoBehaviour:
   m_ObjectHideFlags: 0

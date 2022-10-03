@@ -6,6 +6,8 @@ public class EnterGameTransition : MonoBehaviour
 {
     public Player player;
     public float fadeInDuration = 5f;
+    public ToastHint introNoticeHint;
+    public ToastHint movementTutorialHint;
 
     private void Awake()
     {
@@ -15,11 +17,15 @@ public class EnterGameTransition : MonoBehaviour
 
     private IEnumerator RunEnterTransition()
     {
-        StartCoroutine(Helpers.RunVolumeWeightTransition(App.BlackFadeVolume, fadeInDuration, 1, 0, smooth: false));
-        yield return YieldInstructionCache.WaitForSeconds(fadeInDuration);
+        yield return Helpers.RunVolumeWeightTransition(App.BlackFadeVolume, fadeInDuration, 1, 0, smooth: false);
+        player.toastHintSystem.QueueHint(introNoticeHint);
+        while (player.toastHintSystem.IsPlayingHint)
+        {
+            yield return null;
+        }
+        player.toastHintSystem.QueueHint(movementTutorialHint);
         player.controls.enabled = true;
 
-        // show movement controls
         while (player.controls.CurrentMotion == FPSControls.MotionType.Stationary)
         {
             yield return null;

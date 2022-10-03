@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     public InteractRaycaster interactRaycaster;
     public PlayerSounds sounds;
     public TimestopPower timestopPower;
+    public ToastHintSystem toastHintSystem;
+    public ToastHint interactableHint;
+    private bool hasFoundFirstInteractable = false;
 
     public void SetSpawnPoint(RespawnPoint point, bool playSound = false)
     {
@@ -79,6 +82,11 @@ public class Player : MonoBehaviour
 
     private void OnInteractableFound()
     {
+        if (!hasFoundFirstInteractable)
+        {
+            hasFoundFirstInteractable = true;
+            toastHintSystem.QueueHint(interactableHint);
+        }
         cameraEffects.SetInteractEffectActive(true, interactRaycaster.CurrentInteractable.usePrompt);
     }
 
