@@ -28,7 +28,7 @@ public class InteractRaycaster : MonoBehaviour
             for (int i = 0; i < numHits; ++i)
             {
                 Interactable interactable = cachedRaycastHits[i].collider.gameObject.GetComponent<Interactable>();
-                if (interactable == null)
+                if (interactable == null || !interactable.enabled)
                 {
                     continue;
                 }

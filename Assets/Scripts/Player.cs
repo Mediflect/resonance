@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
 
     private void OnInteractableFound()
     {
-        cameraEffects.SetInteractEffectActive(true);
+        cameraEffects.SetInteractEffectActive(true, interactRaycaster.CurrentInteractable.usePrompt);
     }
 
     private void OnInteractableLost()

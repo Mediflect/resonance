@@ -1421,7 +1421,7 @@ Transform:
   - {fileID: 2792176218500007388}
   - {fileID: 5707269202617797084}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
 --- !u!114 &1252883968418984849
 MonoBehaviour:
@@ -1438,8 +1438,10 @@ MonoBehaviour:
   geoTransform: {fileID: 2792176218500007388}
   interactable: {fileID: 7304467748849098983}
   respawn: {fileID: 0}
+  lasers: {fileID: 0}
   shakeTransitionTime: 2
   shakeMaxValue: 0.2
+  holdTime: 2
   outTransitionTime: 4
 --- !u!1 &2792176218500007379
 GameObject:
@@ -2878,6 +2880,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isUsableDuringCyclePause: 0
+  usePrompt: reclaim lost power
 --- !u!65 &6747322105344849669
 BoxCollider:
   m_ObjectHideFlags: 0

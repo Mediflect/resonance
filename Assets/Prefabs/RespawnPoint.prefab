@@ -5244,6 +5244,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   isUsableDuringCyclePause: 0
+  usePrompt: store resonance
 --- !u!65 &3714371272983392660
 BoxCollider:
   m_ObjectHideFlags: 0

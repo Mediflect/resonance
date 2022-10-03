@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     public event System.Action<Player> PlayerInteractedNative;
 
     public bool isUsableDuringCyclePause = false;
+    public string usePrompt = "interact";
 
     public void Use(Player player)
     {

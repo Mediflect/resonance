@@ -14,6 +14,9 @@ public class ToggleSwitch : MonoBehaviour
     public Transform handleOffTarget;
     public GameObject onLight;
     public GameObject offLight;
+    public Interactable interactable;
+    public string turnOnPrompt = "power on";
+    public string turnOffPrompt = "power off";
 
     [Header("Sounds")]
     public PitchRandomizer onSound;
@@ -42,21 +45,23 @@ public class ToggleSwitch : MonoBehaviour
         {
             handleObj.position = handleOffTarget.position;
         }
+        interactable.usePrompt = isOn ? turnOffPrompt : turnOnPrompt;
         InvokeStateChange(playSounds: false);
     }
 
 
     private IEnumerator RunToggle()
     {
+        interactable.enabled = false;
         isOn = !isOn;
-        StartCoroutine(RunHandleMove());
+        yield return RunHandleMove();
         while (App.Cycle.IsPaused)
         {
-            Debug.Log("waiting for cycle");
             yield return null;
         }
         InvokeStateChange(playSounds: true);
-
+        interactable.enabled = true;
+        interactable.usePrompt = isOn ? turnOffPrompt : turnOnPrompt;
         toggleCoroutine = null;
     }
 

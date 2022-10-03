@@ -62,6 +62,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   isUsableDuringCyclePause: 1
+  usePrompt: toggle power
 --- !u!65 &3495115008050542269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2762,6 +2763,9 @@ MonoBehaviour:
   handleOffTarget: {fileID: 6670161071343284320}
   onLight: {fileID: 3422393894130882709}
   offLight: {fileID: 8296328853716506682}
+  interactable: {fileID: 264423246759488759}
+  turnOnPrompt: power on
+  turnOffPrompt: power off
   onSound: {fileID: 6524003188056581173}
   offSound: {fileID: 3372809109329891611}
 --- !u!1 &8392190028439512684
