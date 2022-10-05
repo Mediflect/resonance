@@ -1,0 +1,10 @@
+{
+  "name": "com.medi.pkg",
+  "version": "4.20.69",
+  "displayName": "Medi Package",
+  "description": "like, utils and stuff idk",
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.0"
+  },
+  "type": "library"
+}

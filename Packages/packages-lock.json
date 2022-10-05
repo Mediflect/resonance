@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.medi.pkg": {
-      "version": "file:E:/GameDev/Unity/medi-pkg",
+      "version": "file:medi-pkg",
       "depth": 0,
-      "source": "local",
+      "source": "embedded",
       "dependencies": {
         "com.unity.textmeshpro": "3.0.0"
       }
