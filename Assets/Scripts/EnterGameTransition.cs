@@ -14,8 +14,8 @@ public class EnterGameTransition : MonoBehaviour
 
     private void Awake()
     {
-        App.Request(() => StartCoroutine(RunEnterTransition()));
         player.controls.enabled = false;
+        App.Request(() => StartCoroutine(RunEnterTransition()));
     }
 
     private IEnumerator RunEnterTransition()
